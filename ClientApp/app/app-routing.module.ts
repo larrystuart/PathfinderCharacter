@@ -1,0 +1,28 @@
+﻿import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { HomeComponent } from './components/home/home.component';
+import { SkillsComponent } from './components/skills/skills.component';
+import { InventoryComponent } from './components/inventory/inventory.component';
+import { DiceComponent } from './components/dice/dice.component';
+import { SpellsComponent } from './components/spells/spells.component';
+
+const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent }, //by having "component:" this is eagerly loaded
+    { path: 'spells', component: SpellsComponent },
+    { path: 'skills', component: SkillsComponent },
+    //{ path: 'skills', loadChildren: 'app/components/skills/skills.component#SkillsComponent' }, //by having "loadChildren:" this is lazy loaded, but I think it needs to be a module, not a component???
+    { path: 'dice', component: DiceComponent },
+    { path: 'inventory', component: InventoryComponent },
+    { path: '**', redirectTo: 'home' }
+];
+
+@NgModule({
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
+})
+
+export class AppRoutingModule { }
+
+export const routableComponents = [HomeComponent, SkillsComponent, InventoryComponent, DiceComponent, SpellsComponent]

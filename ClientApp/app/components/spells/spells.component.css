@@ -1,0 +1,24 @@
+﻿.pc-clickable {
+    cursor: pointer;
+}
+
+    .pc-clickable a {
+        text-decoration: underline;
+    }
+
+.pc-collapse-header {
+    width: 100%;
+    margin: -10px -15px;
+    padding: 10px 15px;
+    position: relative;
+    display: block;
+}
+
+.pc-spell-details {
+    padding:15px;
+}
+
+.pc-spell-table-label
+{
+    width : 150px;
+}

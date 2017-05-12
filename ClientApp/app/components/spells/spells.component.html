@@ -1,0 +1,126 @@
+<h1>Spells</h1>
+
+<h2>Classes</h2>
+<div class="col-sm-6 col-md-4 col-lg-3" *ngIf="filterClasses != null">
+    <select class="form-control input-lg" [(ngModel)]="filterClassId">
+        <option value="">-- All --</option>
+        <option *ngFor="let class of filterClasses" [value]="class.id">{{class.name}}</option>
+    </select>
+</div>
+<div class="clearfix"></div>
+<!--<button *ngFor="let class of filterClasses" (click)="filterByClass(class.id)" [ngClass]="{ 'btn-primary' : class.id == filterClassId }" class="btn btn-default"><span class="glyphicon glyphicon-apple"> {{class.name}}</span></button>-->
+
+<h2>Levels</h2>
+<div *ngIf="filterLevels != null">
+    <button *ngFor="let level of filterLevels" (click)="filterByLevel(level)" [ngClass]="{ 'btn-primary' : level == filterLevel }" class="btn btn-default"><span class="glyphicon glyphicon-signal"> {{level}}</span></button>
+</div>
+<h2>Schools</h2>
+<div *ngIf="filterSchools != null">
+    <button *ngFor="let school of filterSchools" (click)="filterBySchool(school.id)" [ngClass]="{ 'btn-primary' : school.id == filterSchoolId }" class="btn btn-default"><span class="glyphicon glyphicon-education"> {{school.name}}</span></button>
+</div>
+<h2>Saving Throw</h2>
+<div *ngIf="filterSavingThrows != null">
+    <button *ngFor="let savingThrow of filterSavingThrows" (click)="filterBySavingThrow(savingThrow.id)" [ngClass]="{ 'btn-primary' : savingThrow.id == filterSavingThrowId }" class="btn btn-default"><span class="glyphicon glyphicon-flash"> {{savingThrow.name}}</span></button>
+</div>
+
+<hr />
+
+<p *ngIf="!spells"><em>Loading...</em></p>
+<div *ngIf="spells">
+    <!--<table class='table'>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Level</th>
+                <th>School</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let spell of spells | spellsFilter : filterClassId : filterLevel : filterSchoolId : filterSavingThrowId">
+                <td>{{ spell.name }}</td>
+                <td *ngIf="!filterClassId"><span *ngFor="let class of spell.classes">{{  class.heroClass.name + " ("+class.classLevel+") " }}</span></td>
+                <td *ngIf="filterClassId"><span>{{ getSpellLevelByClass(spell) }}</span></td>
+                <td><span *ngIf="spell.school != null">{{ spell.school.name }}</span></td>
+                <td>{{ spell.shortDescription }}</td>
+            </tr>
+        </tbody>
+    </table>-->
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default" *ngFor="let spell of spells | spellsFilter : filterClassId : filterLevel : filterSchoolId : filterSavingThrowId">
+            <div class="panel-heading">
+                <a data-toggle="collapse" class="pc-collapse-header" data-parent="#accordion"  [href]="'#' + spell.id"> 
+                    <div class="col-lg-3"><h3>{{ spell.name }}</h3></div>
+                    <div class="col-lg-4" *ngIf="!filterClassId"><span *ngFor="let class of spell.classes">{{  class.heroClass.name + " ("+class.classLevel+") " }}</span></div>
+                    <div class="col-lg-1" *ngIf="filterClassId"><span>{{ getSpellLevelByClass(spell) }}</span></div>
+                    <div class="col-lg-1" *ngIf="spell.school != null">{{ spell.school.name }}</div>
+                    <div class="col-lg-4">{{ spell.shortDescription }}</div>
+                    <div class="clearfix"></div>
+                </a>
+                
+            </div>
+            <div [id]="spell.id" class="panel-collapse collapse">
+                <table class='table'>
+                    <tr *ngIf="spell.area">
+                        <td class="pc-spell-table-label">Area:</td>
+                        <td>{{spell.area}}</td>
+                    </tr>
+                    <tr *ngIf="spell.augmentedText">
+                        <td class="pc-spell-table-label">Augmented:</td>
+                        <td>{{spell.augmentedText}}</td>
+                    </tr>
+                    <tr *ngIf="spell.duration">
+                        <td class="pc-spell-table-label">Duration:</td>
+                        <td>{{spell.duration}}</td>
+                    </tr>
+                    <tr *ngIf="spell.effect">
+                        <td class="pc-spell-table-label">Effect:</td>
+                        <td>{{spell.effect}}</td>
+                    </tr>
+                    <tr *ngIf="spell.range">
+                        <td class="pc-spell-table-label">Range:</td>
+                        <td>{{spell.range}}</td>
+                    </tr>
+                    <tr *ngIf="spell.targets">
+                        <td class="pc-spell-table-label">Targets:</td>
+                        <td>{{spell.targets}}</td>
+                    </tr>
+                    <tr *ngIf="spell.spellSubschools && spell.spellSubschools.length > 0">
+                        <td class="pc-spell-table-label">Subschools:</td>
+                        <td>
+                            <span *ngFor="let spellSubschool of spell.spellSubschools, let index = index">
+                                <span *ngIf="index != 0">, </span>{{spellSubschool.subschool.name}}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="spell.spellResistance != null">
+                        <td class="pc-spell-table-label">Spell Resistance:</td>
+                        <td>
+                            <span *ngIf="spell.spellResistance">Yes</span>
+                            <span *ngIf="!spell.spellResistance">No</span>
+                            <span *ngIf="spell.spellResistanceHarmless != null && spell.spellResistanceHarmless">(harmless)</span>
+                            <span *ngIf="spell.spellResistanceObject != null && spell.spellResistanceObject">(object)</span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="spell.components != null">
+                        <td class="pc-spell-table-label">Components:</td>
+                        <td class="pc-spell-table-label">
+                            <span *ngIf="spell.components != null">
+                                <span *ngFor="let myComponent of spell.components, let index = index">
+                                    <span *ngIf="index != 0">, </span>
+                                    {{myComponent.componentType.symbol}}<span *ngIf="myComponent.material"><span *ngIf="myComponent.materialCost"> [{{myComponent.materialCost.amount}}{{myComponent.materialCost.currencyUnit.nameShort}}]</span> ({{myComponent.material}})</span>
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="pc-spell-details" [innerHtml]="spell.htmlDescription"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
