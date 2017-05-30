@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'dice',
     templateUrl: './dice.component.html'
 })
-export class DiceComponent {
-    public currentCount = 0;
+export class DiceComponent implements OnInit {
 
-    public incrementCounter() {
-        this.currentCount++;
+    ngOnInit() {
+        
     }
+
 }

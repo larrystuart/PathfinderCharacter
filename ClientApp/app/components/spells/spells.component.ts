@@ -5,7 +5,6 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Pipe({ name: 'spellsFilter' })
 export class SpellsFilter implements PipeTransform {
     transform(spells: Spell[], filterClassId: string, filterSpellLevel: number, filterSchoolId: string, filterSavingThrowId: string): Spell[] {
-        console.log(spells[0]);
         return spells.filter(function (el: any) {
             
             return el.classes.some(c =>

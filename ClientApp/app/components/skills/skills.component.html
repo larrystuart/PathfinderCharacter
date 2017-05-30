@@ -1,7 +1,59 @@
 <h1>Skills</h1>
-
-<p>This is a simple example of an Angular 2 component.</p>
-
-<p>Current count: <strong>{{ currentCount }}</strong></p>
-
-<button (click)="incrementCounter()">Increment</button>
+<form [formGroup]="skillsForm" autocomplete="off" novalidate>
+    <div class="table-responsive">
+        <table class="table skill-table">
+            <tr>
+                <th>Skill Names</th>
+                <th>Total Bonus</th>
+                <th></th>
+                <th>Ability Mod.</th>
+                <th></th>
+                <th>Ranks</th>
+                <th></th>
+                <th>Misc. Mod.</th>
+            </tr>
+            <!--<skill-row skillTitle="Acrobatics" skillAbility="Dex" field="acrobatics"></skill-row>-->
+            
+            <!--<tr *ngFor="let skillRow of characterSkills">
+                <td>{{skillRow.Title}}</td>
+                <td class="skill-entry"><div>{{skillRow.totalBonus}}</div></td>
+                <td>={{skillRow.abilityType}}</td>
+                <td class="skill-entry"><div>{{skillRow.abilityModifier}}</div></td>
+                <td>+</td>
+                <td class="skill-entry" [ngClass]="{'error': skillsForm.controls.acrobatics.invalid && skillsForm.controls.acrobatics.touched}">
+                    <input formControlName="acrobatics" id="acrobatics" type="number" />
+                    <i *ngIf="skillsForm.controls.acrobatics.invalid && skillsForm.controls.acrobatics.dirty && skillsForm.controls.acrobatics.errors.maxValue !== undefined">Max: {{skillsForm.controls.acrobatics.errors.maxValue}}</i>
+                    <i *ngIf="skillsForm.controls.acrobatics.invalid && skillsForm.controls.acrobatics.dirty && skillsForm.controls.acrobatics.errors.minValue !== undefined">Min: {{skillsForm.controls.acrobatics.errors.minValue}}</i>
+                </td>
+                <td>+</td>
+                <td class="skill-entry"><div>&nbsp;</div></td>
+            </tr>-->
+            
+            
+            <tr>
+                <td>Acrobatics</td>
+                <td class="skill-entry"><div>&nbsp;</div></td>
+                <td>=Dex</td>
+                <td class="skill-entry"><div>&nbsp;</div></td>
+                <td>+</td>
+                <td class="skill-entry" [ngClass]="{'error': skillsForm.controls.acrobatics.invalid && skillsForm.controls.acrobatics.touched}">
+                    <input formControlName="acrobatics" id="acrobatics" type="number" />
+                    <i *ngIf="skillsForm.controls.acrobatics.invalid && skillsForm.controls.acrobatics.dirty && skillsForm.controls.acrobatics.errors.maxValue !== undefined">Max: {{skillsForm.controls.acrobatics.errors.maxValue}}</i>
+                    <i *ngIf="skillsForm.controls.acrobatics.invalid && skillsForm.controls.acrobatics.dirty && skillsForm.controls.acrobatics.errors.minValue !== undefined">Min: {{skillsForm.controls.acrobatics.errors.minValue}}</i>
+                </td>
+                <td>+</td>
+                <td class="skill-entry"><div>&nbsp;</div></td>
+            </tr>
+            <tr>
+                <td>Appraise</td>
+                <td class="skill-entry"><div>&nbsp;</div></td>
+                <td>=Int</td>
+                <td class="skill-entry"><div>&nbsp;</div></td>
+                <td>+</td>
+                <td class="skill-entry"><input formControlName="appraise" id="appraise" type="number" max="99" /></td>
+                <td>+</td>
+                <td class="skill-entry"><div>&nbsp;</div></td>
+            </tr>
+        </table>
+    </div>
+</form>

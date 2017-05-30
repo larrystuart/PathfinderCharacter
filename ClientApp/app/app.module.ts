@@ -4,7 +4,7 @@ import { UniversalModule } from 'angular2-universal';
 import { AppComponent } from './components/app/app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { SpellsFilter } from './components/spells/spells.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
 
 @NgModule({
@@ -18,6 +18,7 @@ import { AppRoutingModule, routableComponents } from './app-routing.module';
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
+        ReactiveFormsModule,
         RouterModule,
         AppRoutingModule // Must be last to catch all for routing if other routes are added
     ],

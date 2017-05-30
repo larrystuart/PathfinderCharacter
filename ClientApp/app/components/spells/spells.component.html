@@ -109,7 +109,8 @@
                             <span *ngIf="spell.components != null">
                                 <span *ngFor="let myComponent of spell.components, let index = index">
                                     <span *ngIf="index != 0">, </span>
-                                    {{myComponent.componentType.symbol}}<span *ngIf="myComponent.material"><span *ngIf="myComponent.materialCost"> [{{myComponent.materialCost.amount}}{{myComponent.materialCost.currencyUnit.nameShort}}]</span> ({{myComponent.material}})</span>
+                                    {{myComponent.componentType.symbol}}<span *ngIf="myComponent.material"><span *ngIf="myComponent.materialCost"> 
+                                    [{{myComponent.materialCost.amount}}{{myComponent.materialCost.currencyUnit.nameShort}}]</span> ({{myComponent.material}})</span>
                                 </span>
                             </span>
                         </td>

@@ -23,10 +23,6 @@ namespace PathfinderCharacter.Controllers
             this.pfContext = pfContext;
         }
 
-        //var rng = new Random();
-        //rng.Next(-20, 55)
-        //Summary = Summaries[rng.Next(Summaries.Length)]
-
         [HttpGet("[action]")]
         public IEnumerable<HeroClass> HeroClasses()
         {
