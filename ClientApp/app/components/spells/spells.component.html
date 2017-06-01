@@ -2,7 +2,7 @@
 
 <h2>Classes</h2>
 <div class="col-sm-6 col-md-4 col-lg-3" *ngIf="filterClasses != null">
-    <select class="form-control input-lg" [(ngModel)]="filterClassId">
+    <select class="form-control input-lg" [(ngModel)]="filterClassId" (ngModelChange)="filterSpells()">
         <option value="">-- All --</option>
         <option *ngFor="let class of filterClasses" [value]="class.id">{{class.name}}</option>
     </select>
@@ -12,7 +12,7 @@
 
 <h2>Levels</h2>
 <div *ngIf="filterLevels != null">
-    <button *ngFor="let level of filterLevels" (click)="filterByLevel(level)" [ngClass]="{ 'btn-primary' : level == filterLevel }" class="btn btn-default"><span class="glyphicon glyphicon-signal"> {{level}}</span></button>
+    <button *ngFor="let level of filterLevels" (click)="filterByLevel(level)" [class.btn-primary]="level === filterLevel" class="btn btn-default"><span class="glyphicon glyphicon-signal"> {{level}}</span></button>
 </div>
 <h2>Schools</h2>
 <div *ngIf="filterSchools != null">
@@ -48,7 +48,7 @@
     </table>-->
 
     <div class="panel-group" id="accordion">
-        <div class="panel panel-default" *ngFor="let spell of spells | spellsFilter : filterClassId : filterLevel : filterSchoolId : filterSavingThrowId">
+        <div class="panel panel-default" *ngFor="let spell of visibleSpells">
             <div class="panel-heading">
                 <a data-toggle="collapse" class="pc-collapse-header" data-parent="#accordion"  [href]="'#' + spell.id"> 
                     <div class="col-lg-3"><h3>{{ spell.name }}</h3></div>

@@ -1,0 +1,36 @@
+﻿table.skill-table
+{
+
+}
+
+table.skill-table tr th
+{
+    font-size: 8pt;
+}
+
+table.skill-entry tr td
+{
+
+}
+
+skill-entry
+
+td.skill-entry
+{
+    text-align:center;
+    
+}
+
+td.skill-entry input {
+    border: none;
+    text-align: center;
+    width: 50px;
+    background: none;
+    box-shadow: none;
+    border-bottom: 1px solid black;
+}
+
+td.skill-entry div {
+    border-bottom: 1px solid black;
+    width:50px;
+}

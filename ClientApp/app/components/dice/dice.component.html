@@ -1,7 +1,20 @@
 <h1>Dice</h1>
 
+<button type="button" class="btn btn-default" (click)="addD100()"><i class="glyphicon glyphicon-plus-sign"></i> D100</button>
 <button type="button" class="btn btn-default" (click)="addD20()"><i class="glyphicon glyphicon-plus-sign"></i> D20</button>
 <button type="button" class="btn btn-default" (click)="addD12()"><i class="glyphicon glyphicon-plus-sign"></i> D12</button>
 <button type="button" class="btn btn-default" (click)="addD8()"><i class="glyphicon glyphicon-plus-sign"></i> D8</button>
 <button type="button" class="btn btn-default" (click)="addD6()"><i class="glyphicon glyphicon-plus-sign"></i> D6</button>
 <button type="button" class="btn btn-default" (click)="addD4()"><i class="glyphicon glyphicon-plus-sign"></i> D4</button>
+
+<div class="dice-container clearfix">
+    <die *ngFor="let myDie of dice" [die]="myDie" (click)="removeDie(myDie)"></die>
+</div>
+
+<div class="clearfix" *ngIf="dice.length > 0">
+    <h2>Total Value: {{totalValue()}}</h2>
+
+    <div>
+        <button type="button" class="btn btn-success" (click)="rollDice()"><i class="glyphicon glyphicon-refresh"></i> Roll</button>
+    </div>
+</div>
