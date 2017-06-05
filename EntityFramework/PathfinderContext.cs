@@ -28,5 +28,11 @@ namespace PathfinderCharacter
         public DbSet<Spell> Spells { get; set; }
         public DbSet<Subschool> Subschools { get; set; }
         public DbSet<TimeUnit> TimeUnits { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Modifier>()
+                .HasIndex(m => m.IdToModify);
+        }
+
     }
 }
