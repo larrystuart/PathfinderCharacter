@@ -16,17 +16,40 @@ namespace PathfinderCharacter.Models
         //public Race Race { get; set; }
         //public Size Size { get; set; }
         public string Gender { get; set; }
-        public CharacterStat Age { get; set; }
-        public CharacterStat Weight { get; set; }
-        public CharacterStat Height { get; set; }
+        public ModifiableStat Age { get; set; }
+        public ModifiableStat Weight { get; set; }
+        public ModifiableStat Height { get; set; }
         public string Hair { get; set; }
         public string Eyes { get; set; }
-        public CharacterStat FlySpeed { get; set; }
-        public CharacterStat WalkSpeed { get; set; }
-        public CharacterStat SwimSpeed { get; set; }
-        public CharacterStat ClimbSpeed { get; set; }
-        public CharacterStat BurrowSpeed { get; set; }
-        public CharacterStat MaxHitpoints { get; set; }
+        public ModifiableStat FlySpeed { get; set; }
+        public ModifiableStat WalkSpeed { get; set; }
+        public ModifiableStat SwimSpeed { get; set; }
+        public ModifiableStat ClimbSpeed { get; set; }
+        public ModifiableStat BurrowSpeed { get; set; }
+        public ModifiableStat MaxHitpoints { get; set; }
+        public ModifiableStat Initiative { get; set; }
+        public ModifiableStat DamageReduction { get; set; }
+        public int Damage { get; set; }
+        public int NonLethatDamage { get; set; }
+
+        //public List<Scar> Scars { get; set; }
+        public ModifiableStat ArmorClass { get; set; }
+        public ModifiableStat TouchArmorClass { get; set; }
+        public ModifiableStat FlatFootedArmorClass { get; set; }
+        public ModifiableStat BaseAttackBonus { get; set; }
+        //public CharacterSave FortitudeSave { get; set; }
+        //public CharacterSave ReflexSave { get; set; }
+        //public CharacterSave WillSave { get; set; }
+        public ModifiableStat SpellResistance { get; set; }
+        public ModifiableStat CombatManeuverBonus { get; set; }
+
+        public ModifiableStat CombatManeuverDefense { get; set; }
+        public List<Attack> Attacks { get; set; }
+        public List<string> Languages { get; set; }
+        public int ExperiencePoints { get; set; }
+        public int
+
+
 
         public List<CharacterSkill> CharacterSkills {get;set;}
         public List<CharacterBloodline> CharacterBloodlines { get; set; }
@@ -36,7 +59,24 @@ namespace PathfinderCharacter.Models
         public List<Spell> CharacterSpellbook { get; set; }
     }
 
-    public class CharacterStat
+
+    public class Attack {
+        public Guid Id { get; set; }
+        public ModifiableStat AttackBonus { get; set; }
+        public ModifiableStat Critical { get; set; }
+        //public DamageType DamageType { get; set; }
+        //public Ammunition Ammunition { get; set; }
+        public ModifiableStat D4s { get; set; }
+        public ModifiableStat D6s { get; set; }
+        public ModifiableStat D8s { get; set; }
+        public ModifiableStat D10s { get; set; }
+        public ModifiableStat D12s { get; set; }
+        public ModifiableStat D20s { get; set; }
+        public ModifiableStat BaseDamage { get; set; }
+    }
+
+
+    public class ModifiableStat
     {
         public Guid Id { get; set; }
         public int Value { get; set; }     
@@ -63,7 +103,7 @@ namespace PathfinderCharacter.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public Ability AbilityModifierType { get; set; }
-
+        public bool TrainedOnly { get; set; }
     }
 
     public class Ability
