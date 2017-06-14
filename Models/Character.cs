@@ -21,6 +21,13 @@ namespace PathfinderCharacter.Models
         public ModifiableStat Height { get; set; }
         public string Hair { get; set; }
         public string Eyes { get; set; }
+        public CharacterAbility Strength { get; set; }
+        public CharacterAbility Dexterity { get; set; }
+        public CharacterAbility Constitution { get; set; }
+        public CharacterAbility Intelligence { get; set; }
+        public CharacterAbility Wisdom { get; set; }
+        public CharacterAbility Charisma { get; set; }
+
         public ModifiableStat FlySpeed { get; set; }
         public ModifiableStat WalkSpeed { get; set; }
         public ModifiableStat SwimSpeed { get; set; }
@@ -37,9 +44,9 @@ namespace PathfinderCharacter.Models
         public ModifiableStat TouchArmorClass { get; set; }
         public ModifiableStat FlatFootedArmorClass { get; set; }
         public ModifiableStat BaseAttackBonus { get; set; }
-        //public CharacterSave FortitudeSave { get; set; }
-        //public CharacterSave ReflexSave { get; set; }
-        //public CharacterSave WillSave { get; set; }
+        public CharacterSave FortitudeSave { get; set; }
+        public CharacterSave ReflexSave { get; set; }
+        public CharacterSave WillSave { get; set; }
         public ModifiableStat SpellResistance { get; set; }
         public ModifiableStat CombatManeuverBonus { get; set; }
 
@@ -47,7 +54,6 @@ namespace PathfinderCharacter.Models
         public List<Attack> Attacks { get; set; }
         public List<string> Languages { get; set; }
         public int ExperiencePoints { get; set; }
-        public int
 
 
 
@@ -91,6 +97,13 @@ namespace PathfinderCharacter.Models
         public bool Stackable { get; set; }
     }
 
+    public class CharacterSave
+    {
+        public Guid Id { get; set; }
+        public SavingThrow Save { get; set; }
+        public ModifiableStat Value { get; set; }
+    }
+
     public class CharacterSkill
     {
         public Guid Id { get; set; }
@@ -117,7 +130,7 @@ namespace PathfinderCharacter.Models
     {
         public Guid Id { get; set; }
         public Ability Ability { get; set; }
-        public int BaseScore { get; set; }
+        public ModifiableStat BaseScore { get; set; }
     }
 
     public class CharacterHeroClass
