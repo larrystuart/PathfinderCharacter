@@ -1,31 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { HeroClass, SavingThrow, School } from '../../shared/lookup.service';
+import { CacheService } from '../../shared/cache.service';
 
 @Injectable()
 export class SpellService
 {
     private baseUrl: string = '/api/Spells/';
-
-    constructor(private http: Http)
+    
+    constructor(private http: Http, private cacheService: CacheService)
     {
-    }
-
-    getAll(): Observable<Spell[]> {
-        let spells$ = this.http
-            .get(this.baseUrl + 'Spells')
-            .map(mapSpells);
-            //.subscribe(result => {
-            //return result.json() as Spell[];
         
-        return spells$;
+    }
+    
+    getAll(): Observable<Spell[]> {
+        return this.cacheService.getSpells(this.baseUrl + 'Spells');
     }
     
 }
 
 function mapSpells(response: Response): Spell[] {
+
     // The response of the API has a results
     // property with the actual results
     return response.json() as Spell[]; //.map(toSpell)

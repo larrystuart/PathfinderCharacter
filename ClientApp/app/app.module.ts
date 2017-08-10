@@ -7,6 +7,8 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
 import { LookupService } from './shared/lookup.service';
+import { CacheService } from './shared/cache.service';
+//import { CachedData } from './shared/cacheddata';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -21,9 +23,11 @@ import { LookupService } from './shared/lookup.service';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        AppRoutingModule // Must be last to catch all for routing if other routes are added
+        AppRoutingModule//, // Must be last to catch all for routing if other routes are added
+        //CachedData
     ],
-    providers: [LookupService]
+    providers: [LookupService, CacheService]
 })
 export class AppModule {
+    //constructor(cachedData: CachedData) { }
 }

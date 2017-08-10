@@ -50,6 +50,12 @@ export class SpellsComponent {
     public filterSchools: School[];
     public filterSavingThrows: SavingThrow[];
 
+    // pager object
+    public pager: any = {};
+    // paged items
+    public pagedItems: any[];
+
+
     constructor(/*http: Http,*/ private lookupService: LookupService, private spellService : SpellService) {
 
         spellService.getAll().subscribe(result => {
@@ -154,7 +160,20 @@ export class SpellsComponent {
     private setDefaultVisibleSpells()
     {
         this.visibleSpells = this.spells.slice(0); //cheap and easy way to clone.
+        this.setPage(1);
         this.sortSpells();
+    }
+
+    public setPage(page: number) {
+        if (page < 1 || page > this.pager.totalPages) {
+            return;
+        }
+
+        //// get pager object from service
+        //this.pager = this.pagerService.getPager(this.allItems.length, page);
+
+        //// get current page of items
+        //this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 
     public filterSpells() {
