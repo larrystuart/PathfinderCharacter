@@ -8,7 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
 import { LookupService } from './shared/lookup.service';
 import { CacheService } from './shared/cache.service';
-//import { CachedData } from './shared/cacheddata';
+
+import { PagerService } from './shared/pager.service';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -23,10 +24,9 @@ import { CacheService } from './shared/cache.service';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        AppRoutingModule//, // Must be last to catch all for routing if other routes are added
-        //CachedData
+        AppRoutingModule// Must be last to catch all for routing if other routes are added
     ],
-    providers: [LookupService, CacheService]
+    providers: [LookupService, CacheService, PagerService]
 })
 export class AppModule {
     //constructor(cachedData: CachedData) { }

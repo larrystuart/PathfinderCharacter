@@ -1,44 +1,19 @@
 import { Component } from '@angular/core';
 /*import { Http, Response, Headers, RequestOptions } from '@angular/http';*/
-import { LookupService, HeroClass, School, SavingThrow } from '../../shared/lookup.service'
-import { SpellService, Spell } from './spells.service'
-
-
-////todo:extract to separate file
-//@Pipe({ name: 'spellsFilter' })
-//export class SpellsFilter implements PipeTransform {
-//    transform(spells: Spell[], filterClassId: string, filterSpellLevel: number, filterSchoolId: string, filterSavingThrowId: string): Spell[] {
-//        return spells.filter(function (el: any) {
-            
-//            return el.classes.some(c =>
-//                (!filterClassId || c.heroClass.id == filterClassId)
-//                && (filterSpellLevel == null || c.classLevel == filterSpellLevel))
-//                && (el.school == null || !filterSchoolId || el.school.id == filterSchoolId)
-//                && (el.spellSavingThrows == null || !filterSavingThrowId || el.spellSavingThrows.some(s => s.savingThrow.id == filterSavingThrowId));
-//        }).sort(function (spell1, spell2) {
-//            var spellClass1 = filterClassId ? spell1.classes.find(c => c.heroClass.id == filterClassId) : spell1.classes[0];
-//            var spellClass2 = filterClassId ? spell2.classes.find(c => c.heroClass.id == filterClassId) : spell2.classes[0];
-
-//            if (spellClass1.classLevel < spellClass2.classLevel) {
-//                return -1;
-//            } else if (spellClass1.classLevel > spellClass2.classLevel) {
-//                return 1;
-//            } else {
-//                return 0;
-//            }
-//        });
-//    }
-//}
+import { LookupService, HeroClass, School, SavingThrow } from '../../shared/lookup.service';
+import { SpellService, Spell } from './spells.service';
+import { PagerService } from '../../shared/pager.service';
 
 @Component({
     selector: 'spells',
     templateUrl: './spells.component.html',
     styleUrls: ['./spells.component.css'],
-    providers: [SpellService]
+    providers: [SpellService, PagerService]
 })
 export class SpellsComponent {
     private spells: Spell[];
     public visibleSpells: Spell[];
+    public filteredSpells: Spell[];
     public message: string;
     //public http: Http;
     public filterClassId: string;
@@ -56,11 +31,11 @@ export class SpellsComponent {
     public pagedItems: any[];
 
 
-    constructor(/*http: Http,*/ private lookupService: LookupService, private spellService : SpellService) {
+    constructor(/*http: Http,*/ private lookupService: LookupService, private spellService: SpellService, private pagerService: PagerService) {
 
         spellService.getAll().subscribe(result => {
             this.spells = result;
-            this.setDefaultVisibleSpells();
+            this.setDefaultFilteredSpells();
         });
 
         lookupService.getHeroClasses().subscribe(result => {
@@ -143,7 +118,7 @@ export class SpellsComponent {
     {
         var tempFilterClassId = this.filterClassId;  //the sort has its own 'this' scope, this bypasses that
 
-        this.visibleSpells.sort(function(spell1, spell2) {
+        this.filteredSpells.sort(function(spell1, spell2) {
             var spellClass1 = tempFilterClassId ? spell1.classes.find(c => c.heroClass.id == tempFilterClassId) : spell1.classes[0];
             var spellClass2 = tempFilterClassId ? spell2.classes.find(c => c.heroClass.id == tempFilterClassId) : spell2.classes[0];
 
@@ -157,11 +132,11 @@ export class SpellsComponent {
         });
     }
 
-    private setDefaultVisibleSpells()
+    private setDefaultFilteredSpells()
     {
-        this.visibleSpells = this.spells.slice(0); //cheap and easy way to clone.
-        this.setPage(1);
+        this.filteredSpells = this.spells.slice(0); //cheap and easy way to clone.
         this.sortSpells();
+        this.setPage(1);
     }
 
     public setPage(page: number) {
@@ -169,21 +144,21 @@ export class SpellsComponent {
             return;
         }
 
-        //// get pager object from service
-        //this.pager = this.pagerService.getPager(this.allItems.length, page);
+        // get pager object from service
+        this.pager = this.pagerService.getPager(this.spells.length, page);
 
-        //// get current page of items
-        //this.pagedItems = this.allItems.slice(this.pager.startIndex, this.pager.endIndex + 1);
+        // get current page of items
+        this.visibleSpells = this.filteredSpells.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 
     public filterSpells() {
         if (this.spells && !this.filterClassId && !this.filterSchoolId && this.filterLevel == null && !this.filterSchoolId && !this.filterSavingThrowId)
         {
-            this.setDefaultVisibleSpells();
+            this.setDefaultFilteredSpells();
         }
         else
         {
-            this.visibleSpells = this.spells.filter(spell => {
+            this.filteredSpells = this.spells.filter(spell => {
                 return spell.classes.some(c =>
                     (!this.filterClassId || c.heroClass.id == this.filterClassId)
                     && (this.filterLevel == null || c.classLevel == this.filterLevel))
@@ -191,8 +166,9 @@ export class SpellsComponent {
                     && (spell.spellSavingThrows == null || !this.filterSavingThrowId || spell.spellSavingThrows.some(s => s.savingThrow.id == this.filterSavingThrowId));
             });
         }
-
+        
         this.sortSpells();
+        this.setPage(1);
     }
     
 }
