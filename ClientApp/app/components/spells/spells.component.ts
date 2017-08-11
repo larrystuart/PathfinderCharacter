@@ -27,9 +27,6 @@ export class SpellsComponent {
 
     // pager object
     public pager: any = {};
-    // paged items
-    public pagedItems: any[];
-
 
     constructor(/*http: Http,*/ private lookupService: LookupService, private spellService: SpellService, private pagerService: PagerService) {
 
@@ -145,7 +142,7 @@ export class SpellsComponent {
         }
 
         // get pager object from service
-        this.pager = this.pagerService.getPager(this.spells.length, page);
+        this.pager = this.pagerService.getPager(this.filteredSpells.length, page, 10);
 
         // get current page of items
         this.visibleSpells = this.filteredSpells.slice(this.pager.startIndex, this.pager.endIndex + 1);

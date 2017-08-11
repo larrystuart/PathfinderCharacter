@@ -1,4 +1,5 @@
-﻿function range(start, count) {
+﻿//replacement of underscore function to create an array based on the bounds of another array
+function range(start, count) {
     return Array.apply(0, Array(count))
         .map(function (element, index) {
             return index + start;
@@ -23,6 +24,7 @@ export class PagerService {
             } else if (currentPage + 4 >= totalPages) {
                 startPage = totalPages - 9;
                 endPage = totalPages;
+                
             } else {
                 startPage = currentPage - 5;
                 endPage = currentPage + 4;
@@ -34,7 +36,7 @@ export class PagerService {
         let endIndex = Math.min(startIndex + pageSize - 1, totalItems - 1);
 
         // create an array of pages to ng-repeat in the pager control
-        let pages = range(startPage, endPage + 1);
+        let pages = range(startPage, (endPage + 1) - startPage);
 
         // return object with all pager properties required by the view
         return {
