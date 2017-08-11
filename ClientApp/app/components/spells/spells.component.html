@@ -123,8 +123,8 @@
                 </table>
             </div>
         </div>
-
-        <nav aria-label="Spell page pagination bar">
+        <pager #spellPager [data]="filteredSpells" (dataViewChange)="setPagedData($event)"></pager>
+        <!--<nav aria-label="Spell page pagination bar">
             <ul class="pagination">
                 <li class="page-item" [ngClass]="{ 'disabled' : pager.currentPage === 1}">
                     <a class="page-link" (click)="setPage(1)" tabindex="-1">First</a>
@@ -142,7 +142,7 @@
                     <a class="page-link" (click)="setPage(pager.totalPages)">Last</a>
                 </li>
             </ul>
-        </nav>
+        </nav>-->
         
     </div>
 </div>

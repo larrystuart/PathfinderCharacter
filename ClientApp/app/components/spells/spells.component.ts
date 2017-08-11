@@ -133,20 +133,25 @@ export class SpellsComponent {
     {
         this.filteredSpells = this.spells.slice(0); //cheap and easy way to clone.
         this.sortSpells();
-        this.setPage(1);
+        //this.setPage(1);
     }
 
-    public setPage(page: number) {
-        if (page < 1 || page > this.pager.totalPages) {
-            return;
-        }
-
-        // get pager object from service
-        this.pager = this.pagerService.getPager(this.filteredSpells.length, page, 10);
-
-        // get current page of items
-        this.visibleSpells = this.filteredSpells.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    public setPagedData(event)
+    {
+        this.visibleSpells = event.data as Spell[];
     }
+
+    //public setPage(page: number) {
+    //    if (page < 1 || page > this.pager.totalPages) {
+    //        return;
+    //    }
+
+    //    // get pager object from service
+    //    this.pager = this.pagerService.getPager(this.filteredSpells.length, page, 10);
+
+    //    // get current page of items
+    //    this.visibleSpells = this.filteredSpells.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    //}
 
     public filterSpells() {
         if (this.spells && !this.filterClassId && !this.filterSchoolId && this.filterLevel == null && !this.filterSchoolId && !this.filterSavingThrowId)
@@ -165,7 +170,7 @@ export class SpellsComponent {
         }
         
         this.sortSpells();
-        this.setPage(1);
+        //this.setPage(1);
     }
     
 }
