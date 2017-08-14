@@ -1,5 +1,7 @@
 <h1>Spells</h1>
-
+<h2>Search Spells</h2>
+<input type="text" class="input-lg" [(ngModel)]="filterSearchQuery" />
+<input type="button" value="Search" class="btn btn-default" (click)="filterSpells();" />
 <h2>Classes</h2>
 <div class="col-sm-6 col-md-4 col-lg-3" *ngIf="filterClasses != null">
     <select class="form-control input-lg" [(ngModel)]="filterClassId" (ngModelChange)="filterSpells()">

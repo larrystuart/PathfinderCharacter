@@ -22,6 +22,7 @@ export class SpellsComponent {
     public filterSavingThrowId: string;
     public filterSchools: School[];
     public filterSavingThrows: SavingThrow[];
+    public filterSearchQuery: string = "";
 
     // pager object
     public pager: any = {};
@@ -77,7 +78,7 @@ export class SpellsComponent {
 
         this.filterSpells();
     }
-
+    
     public filterBySavingThrow(savingThrowId) {
         if (this.filterSavingThrowId == savingThrowId) {
             savingThrowId = null;
@@ -117,7 +118,7 @@ export class SpellsComponent {
     }
 
     public filterSpells() {
-        if (this.spells && !this.filterClassId && !this.filterSchoolId && this.filterLevel == null && !this.filterSchoolId && !this.filterSavingThrowId)
+        if (this.spells && !this.filterClassId && !this.filterSchoolId && this.filterLevel == null && !this.filterSchoolId && !this.filterSavingThrowId && !!!this.filterSearchQuery)
         {
             this.setDefaultFilteredSpells();
         }
@@ -125,7 +126,8 @@ export class SpellsComponent {
         {
             this.filteredSpells = this.spells.filter(spell => {
                 return spell.classes.some(c =>
-                    (!this.filterClassId || c.heroClass.id == this.filterClassId)
+                    (this.filterSearchQuery === "" || spell.name.toLowerCase().indexOf(this.filterSearchQuery.toLowerCase()) !== -1)
+                    && (!this.filterClassId || c.heroClass.id == this.filterClassId)
                     && (this.filterLevel == null || c.classLevel == this.filterLevel))
                     && (spell.school == null || !this.filterSchoolId || spell.school.id == this.filterSchoolId)
                     && (spell.spellSavingThrows == null || !this.filterSavingThrowId || spell.spellSavingThrows.some(s => s.savingThrow.id == this.filterSavingThrowId));
