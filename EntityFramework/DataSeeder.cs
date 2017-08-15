@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using PathfinderCharacter.Models;
+using System.Collections.Generic;
 
 namespace PathfinderCharacter.EntityFramework
 {
@@ -13,6 +14,7 @@ namespace PathfinderCharacter.EntityFramework
 
             // Perform seed operations
             AddBloodlines(context);
+            AddBonusTypes(context);
             AddCastingTimes(context);
             AddComponentTypes(context);
             AddCurrencyUnits(context);
@@ -23,9 +25,13 @@ namespace PathfinderCharacter.EntityFramework
             AddSavingThrows(context);
             AddSchools(context);
             //AddShapes(context);
+            AddStatKeys(context);
             AddSpellDescriptors(context);
             AddSubschools(context);
             AddTimeUnits(context);
+
+            AddDefaultUser(context);
+            
 
             // Save changes and release resources
             context.SaveChanges();
@@ -79,6 +85,13 @@ namespace PathfinderCharacter.EntityFramework
                 new HeroClass { Name = "Stormborn" },
                 new HeroClass { Name = "Undead" },
                 new HeroClass { Name = "Verdant" }
+            );
+        }
+
+        private static void AddBonusTypes(PathfinderContext context)
+        {
+            context.AddRange(
+                new BonusType
             );
         }
 
@@ -153,6 +166,23 @@ namespace PathfinderCharacter.EntityFramework
                 new CurrencyUnit { Name = "Gold Pieces", NameShort = "gp", ValueFactor = 100 },
                 new CurrencyUnit { Name = "Platinum Pieces", NameShort = "pp", ValueFactor = 1000 }
             );
+        }
+
+        private static void AddDefaultUser (PathfinderContext context)
+        {
+            Character DefaultWizard = new Character()
+            {
+                Initiative = 1,
+                Age = 30,
+                Homeland = "somewhere",
+                ArmorClass = 10,
+                BaseAttackBonus = 10,
+                BurrowSpeed = new ModifiableStat() { Value =  },
+                
+           
+            }
+
+            context.Add(new User { FirstName = "Larry", LastName = "Stuart", AuthenticationId = "12345-getProperAuth", UserCharacters = new List<Character>() });
         }
 
         private static void AddDomains(PathfinderContext context)
@@ -326,6 +356,33 @@ namespace PathfinderCharacter.EntityFramework
                 new HeroClass { Name = "Witch" },
                 new HeroClass { Name = "Wizard" }
                 );
+        }
+
+        private static void AddModificationTypes (PathfinderContext context)
+        {
+            context.AddRange(
+                new ModificationType { Id = ModificationTypes.Ability, Stackable = false },
+                new ModificationType { Id = ModificationTypes.Aging, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Armor, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Base, Stackable = true  },
+                new ModificationType { Id = ModificationTypes.Circumstancial, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Competence, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Deflect, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Dodge, Stackable = true  },
+                new ModificationType { Id = ModificationTypes.Enhancement, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Inherent, Stackable = true  },
+                new ModificationType { Id = ModificationTypes.Luck, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Misc, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Morale, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.NaturalArmour, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Profane, Stackable = false },
+                new ModificationType { Id = ModificationTypes.Resistance, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Sacred, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Shield, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Temp, Stackable = false },
+                new ModificationType { Id = ModificationTypes.Trait, Stackable = false  },
+                new ModificationType { Id = ModificationTypes.Untyped, Stackable = true  }
+            );
         }
 
         private static void AddPatrons(PathfinderContext context)
@@ -555,6 +612,79 @@ namespace PathfinderCharacter.EntityFramework
         //        new School { Name = "Cylinder" }
         //    );
         //}
+        
+        private static void AddStatKeys(PathfinderContext context)
+        {
+            context.AddRange(
+                new StatKey { Id = StatKeys.Dexterity, Name = "Dexterity" },
+                new StatKey { Id = StatKeys.Strength, Name = "Strength" },
+                new StatKey { Id = StatKeys.Constitution, Name = "Constitution" },
+                new StatKey { Id = StatKeys.Intelligence, Name = "Intelligence" },
+                new StatKey { Id = StatKeys.Wisdom, Name = "Wisdom" },
+                new StatKey { Id = StatKeys.Charisma, Name = "Charisma" },
+                new StatKey { Id = StatKeys.HitPoints, Name = "Hit Points" },
+                new StatKey { Id = StatKeys.FortitudeSave, Name = "Fortitude Save" },
+                new StatKey { Id = StatKeys.WillSave, Name = "Will Save" },
+                new StatKey { Id = StatKeys.ReflexSave, Name = "Reflex Save" },
+                new StatKey { Id = StatKeys.Damage, Name = "Damage" },
+                new StatKey { Id = StatKeys.Armour, Name = "Armour" },
+                new StatKey { Id = StatKeys.Size, Name = "Size" },
+                new StatKey { Id = StatKeys.ArcaneSpellFailure, Name = "Arcane Spell Failure" },
+                new StatKey { Id = StatKeys.SkillChecks, Name = "Skill Checks" },
+                new StatKey { Id = StatKeys.LandSpeed, Name = "Land Speed" },
+                new StatKey { Id = StatKeys.FlySpeed, Name = "Fly Speed" },
+                new StatKey { Id = StatKeys.SwimSpeed, Name = "Swim Speed" },
+                new StatKey { Id = StatKeys.BurrowSpeed, Name = "Burrow Speed" },
+                new StatKey { Id = StatKeys.ClimbSpeed, Name = "Climb Speed" },
+                new StatKey { Id = StatKeys.FireEnergyResistance, Name = "Fire Energy Resistance" },
+                new StatKey { Id = StatKeys.ColdEnergyResistance, Name = "Cold Energy Resistance" },
+                new StatKey { Id = StatKeys.ElectricityEnergyResistance, Name = "Electricity Energy Resistance" },
+                new StatKey { Id = StatKeys.AcidEnergyResistance, Name = "Acid Energy Resistance" },
+                new StatKey { Id = StatKeys.SonicEnergyResistance, Name = "Sonic Energy Resistance" },
+                new StatKey { Id = StatKeys.Experience, Name = "Experience" },
+                new StatKey { Id = StatKeys.DamageReduction, Name = "Damage Reduction" },
+                new StatKey { Id = StatKeys.SpellResistance, Name = "Spell Resistance" },
+                new StatKey { Id = StatKeys.CriticalMultiplier, Name = "Critical Multiplier" },
+                new StatKey { Id = StatKeys.CriticalRange, Name = "Critical Range" },
+                new StatKey { Id = StatKeys.ArmourCheckPenalty, Name = "Armour Check Penalty" },
+                new StatKey { Id = StatKeys.Initiative, Name = "Initiative" },
+                new StatKey { Id = StatKeys.Acrobatics, Name = "Acrobatics" },
+                new StatKey { Id = StatKeys.Appraise, Name = "Appraise" },
+                new StatKey { Id = StatKeys.Bluff, Name = "Bluff" },
+                new StatKey { Id = StatKeys.Climb, Name = "Climb" },
+                new StatKey { Id = StatKeys.Craft, Name = "Craft" },
+                new StatKey { Id = StatKeys.Diplomacy, Name = "Diplomacy" },
+                new StatKey { Id = StatKeys.DisableDevice, Name = "Disable Device" },
+                new StatKey { Id = StatKeys.Disguise, Name = "Disguise" },
+                new StatKey { Id = StatKeys.EscapeArtist, Name = "Escape Artist" },
+                new StatKey { Id = StatKeys.Fly, Name = "Fly" },
+                new StatKey { Id = StatKeys.HandleAnimal, Name = "Handle Animal" },
+                new StatKey { Id = StatKeys.Heal, Name = "Heal" },
+                new StatKey { Id = StatKeys.Intimidate, Name = "Intimidate" },
+                new StatKey { Id = StatKeys.KnowledgeArcana, Name = "Knowledge Arcana" },
+                new StatKey { Id = StatKeys.KnowledgeDungeoneering, Name = "Knowledge Dungeoneering" },
+                new StatKey { Id = StatKeys.KnowledgeEngineering, Name = "Knowledge Engineering" },
+                new StatKey { Id = StatKeys.KnowledgeGeography, Name = "Knowledge Geography" },
+                new StatKey { Id = StatKeys.KnowledgeHistory, Name = "Knowledge History" },
+                new StatKey { Id = StatKeys.KnowledgeLocal, Name = "Knowledge Local" },
+                new StatKey { Id = StatKeys.KnowledgeNature, Name = "Knowledge Nature" },
+                new StatKey { Id = StatKeys.KnowledgeNobility, Name = "Knowledge Nobility" },
+                new StatKey { Id = StatKeys.KnowledgePlanes, Name = "Knowledge Planes" },
+                new StatKey { Id = StatKeys.KnowledgeReligion, Name = "Knowledge Religion" },
+                new StatKey { Id = StatKeys.Linguistics, Name = "Linguistics" },
+                new StatKey { Id = StatKeys.Perception, Name = "Perception" },
+                new StatKey { Id = StatKeys.Perform, Name = "Perform" },
+                new StatKey { Id = StatKeys.Profession, Name = "Profession" },
+                new StatKey { Id = StatKeys.Ride, Name = "Ride" },
+                new StatKey { Id = StatKeys.SenseMotive, Name = "Sense Motive" },
+                new StatKey { Id = StatKeys.SleightOfHand, Name = "Sleight of Hand" },
+                new StatKey { Id = StatKeys.Spellcraft, Name = "Spellcraft" },
+                new StatKey { Id = StatKeys.Stealth, Name = "Stealth" },
+                new StatKey { Id = StatKeys.Survival, Name = "Survival" },
+                new StatKey { Id = StatKeys.Swim, Name = "Swim" },
+                new StatKey { Id = StatKeys.UseMagicDevice, Name = "Use Magic Device" }
+            );
+        }
 
         private static void AddSpellDescriptors(PathfinderContext context)
         {
@@ -621,8 +751,6 @@ namespace PathfinderCharacter.EntityFramework
                 new TimeUnit { Name = "Days", TimeInSeconds = 86400 }
             );
         }
-
-
-
+        
     }
 }

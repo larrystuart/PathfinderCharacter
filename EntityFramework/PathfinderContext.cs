@@ -28,6 +28,7 @@ namespace PathfinderCharacter
         public DbSet<Spell> Spells { get; set; }
         public DbSet<Subschool> Subschools { get; set; }
         public DbSet<TimeUnit> TimeUnits { get; set; }
+        public DbSet<StatKey> StatKeys { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Modifier>()
