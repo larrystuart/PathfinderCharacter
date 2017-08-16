@@ -10,6 +10,7 @@ import { AppRoutingModule, routableComponents } from './app-routing.module';
 import { LookupService } from './shared/lookup.service';
 import { CacheService } from './shared/cache.service';
 import { PagerService } from './shared/pager.service';
+import { UserService } from './auth/user.service';
 
 @NgModule({
     bootstrap: [AppComponent],

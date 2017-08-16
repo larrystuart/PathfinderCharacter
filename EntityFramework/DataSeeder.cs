@@ -88,12 +88,12 @@ namespace PathfinderCharacter.EntityFramework
             );
         }
 
-        private static void AddBonusTypes(PathfinderContext context)
-        {
-            context.AddRange(
-                new BonusType
-            );
-        }
+        //private static void AddBonusTypes(PathfinderContext context)
+        //{
+        //    context.AddRange(
+        //        new BonusType
+        //    );
+        //}
 
         private static void AddCastingTimes(PathfinderContext context)
         {
@@ -170,19 +170,17 @@ namespace PathfinderCharacter.EntityFramework
 
         private static void AddDefaultUser (PathfinderContext context)
         {
-            Character DefaultWizard = new Character()
-            {
-                Initiative = 1,
-                Age = 30,
-                Homeland = "somewhere",
-                ArmorClass = 10,
-                BaseAttackBonus = 10,
-                BurrowSpeed = new ModifiableStat() { Value =  },
-                
-           
-            }
+            User newUser = new User { FirstName = "Larry", LastName = "Stuart", AuthenticationId = "12345-getProperAuth" };
 
-            context.Add(new User { FirstName = "Larry", LastName = "Stuart", AuthenticationId = "12345-getProperAuth", UserCharacters = new List<Character>() });
+            Character DefaultWizard = new Character(context);
+            DefaultWizard.CharacterSpellbooks.Add(new Spellbook() {
+                IsActive = true,
+                Name = "Default Spellbook"               
+            });
+
+            newUser.UserCharacters.Add(DefaultWizard);
+
+            context.Users.Add(newUser);
         }
 
         private static void AddDomains(PathfinderContext context)
@@ -356,6 +354,46 @@ namespace PathfinderCharacter.EntityFramework
                 new HeroClass { Name = "Witch" },
                 new HeroClass { Name = "Wizard" }
                 );
+        }
+
+        private static void Languages(PathfinderContext context)
+        {
+            context.Languages.AddRange(
+                new Language() { Id = LanguageKeys.Aboleth, Name = "Aboleth" },
+                new Language() { Id = LanguageKeys.Abyssal, Name = "Abyssal" },
+                new Language() { Id = LanguageKeys.Aklo, Name = "Aklo" },
+                new Language() { Id = LanguageKeys.Aquan, Name = "Aquan" },
+                new Language() { Id = LanguageKeys.Auran, Name = "Auran" },
+                new Language() { Id = LanguageKeys.Boggard, Name = "Boggard" },
+                new Language() { Id = LanguageKeys.Celestial, Name = "Celestial" },
+                new Language() { Id = LanguageKeys.Common, Name = "Common" },
+                new Language() { Id = LanguageKeys.Cyclops, Name = "Cyclops" },
+                new Language() { Id = LanguageKeys.DarkFolk, Name = "Dark Folk" },
+                new Language() { Id = LanguageKeys.Draconic, Name = "Draconic" },
+                new Language() { Id = LanguageKeys.DrowSignLanguage, Name = "Drow Sign Language" },
+                new Language() { Id = LanguageKeys.Druidic, Name = "Druidic" },
+                new Language() { Id = LanguageKeys.Dwarven, Name = "Dwarven" },
+                new Language() { Id = LanguageKeys.Dziriak, Name = "Dziriak" },
+                new Language() { Id = LanguageKeys.Elven, Name = "Elven" },
+                new Language() { Id = LanguageKeys.Giant, Name = "Giant" },
+                new Language() { Id = LanguageKeys.Gnoll, Name = "Gnoll" },
+                new Language() { Id = LanguageKeys.Gnome, Name = "Gnome" },
+                new Language() { Id = LanguageKeys.Goblin, Name = "Goblin" },
+                new Language() { Id = LanguageKeys.Grippli, Name = "Grippli" },
+                new Language() { Id = LanguageKeys.Halfling, Name = "Halfling" },
+                new Language() { Id = LanguageKeys.Ignan, Name = "Ignan" },
+                new Language() { Id = LanguageKeys.Infernal, Name = "Infernal" },
+                new Language() { Id = LanguageKeys.Necril, Name = "Necril" },
+                new Language() { Id = LanguageKeys.Orc, Name = "Orc" },
+                new Language() { Id = LanguageKeys.Protean, Name = "Protean" },
+                new Language() { Id = LanguageKeys.Sphinx, Name = "Sphinx" },
+                new Language() { Id = LanguageKeys.Sylvan, Name = "Sylvan" },
+                new Language() { Id = LanguageKeys.Tengu, Name = "Tengu" },
+                new Language() { Id = LanguageKeys.Terran, Name = "Terran" },
+                new Language() { Id = LanguageKeys.Treant, Name = "Treant" },
+                new Language() { Id = LanguageKeys.Undercommon, Name = "Undercommon" },
+                new Language() { Id = LanguageKeys.Vegepygmy, Name = "Vegepygmy" }
+            );
         }
 
         private static void AddModificationTypes (PathfinderContext context)
@@ -751,6 +789,5 @@ namespace PathfinderCharacter.EntityFramework
                 new TimeUnit { Name = "Days", TimeInSeconds = 86400 }
             );
         }
-        
     }
 }

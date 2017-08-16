@@ -20,6 +20,8 @@ namespace PathfinderCharacter
         //public Duration Duration { get; set; }
         public DbSet<HeroClass> HeroClasses { get; set; }
         public DbSet<ComponentType> ComponentTypes { get; set; }
+        public DbSet<ModificationType> ModificationTypes { get; set; }
+        public DbSet<Language> Languages { get; set; }
         public DbSet<Patron> Patrons { get; set; }
         public DbSet<ReferenceSource> ReferenceSources { get; set; }
         public DbSet<SavingThrow> SavingThrows { get; set; }
@@ -29,6 +31,8 @@ namespace PathfinderCharacter
         public DbSet<Subschool> Subschools { get; set; }
         public DbSet<TimeUnit> TimeUnits { get; set; }
         public DbSet<StatKey> StatKeys { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Character> Characters { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Modifier>()

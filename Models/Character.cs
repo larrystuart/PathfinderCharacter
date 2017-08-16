@@ -19,25 +19,90 @@ namespace PathfinderCharacter.Models
         public string Gender { get; set; }
         public string Hair { get; set; }
         public string Eyes { get; set; }
-        public List<ModifiableStat> BaseStats { get; set; }
-
-
+        public int Experience { get; set; }
+        public int Level { get; set; }
+        public ModifiableStat Age { get; set; }
+        public List<CharacterSkill> CharacterSkills { get; set; }
+        public List<CharacterAbility> CharacterAbilities { get; set; }
         //public List<Scar> Scars { get; set; }
         
-        public List<string> Languages { get; set; }
+        public List<Language> Languages { get; set; }
+
         
         public List<CharacterBloodline> CharacterBloodlines { get; set; }
         public List<CharacterHeroClass> CharacterHeroClasses { get; set; }
         public List<CharacterPatron> CharacterPatrons { get; set; }
         public List<Spell> CharacterKnownSpells { get; set; }
         public List<Spellbook> CharacterSpellbooks { get; set; }
+
+        public Character(PathfinderContext context)
+        {
+            Languages = new List<Language>();
+            CharacterBloodlines = new List<CharacterBloodline>();
+            CharacterSkills = new List<CharacterSkill>();
+            CharacterAbilities = new List<CharacterAbility>();
+            CharacterHeroClasses = new List<CharacterHeroClass>();
+            CharacterSpellbooks = new List<Spellbook>();
+
+            Languages.Add(context.Languages.Find(LanguageKeys.Common));
+        }
+    }
+
+    internal struct LanguageKeys
+    {
+        public static Guid Aboleth = new System.Guid("44e86513-e49d-43ae-b725-1d5c62a3cb2c");
+        public static Guid Abyssal = new System.Guid("80443263-52a4-4c19-b921-a7e4dc02757d");
+        public static Guid Aklo = new System.Guid("cc45e467-a2f7-4214-98e8-3bae7efc263b");
+        public static Guid Aquan = new System.Guid("061bcff5-3193-4152-8330-4dc9b4b76bfa");
+        public static Guid Auran = new System.Guid("f0210be3-ebf3-4935-81b2-2f0459291fee");
+        public static Guid Boggard = new System.Guid("121ac9c5-b2e0-479e-95c7-0ee235c9f2e4");
+        public static Guid Celestial = new System.Guid("63952e18-0b6d-4e9b-b4e5-0557f555c6d7");
+        public static Guid Common = new System.Guid("d622d55a-21c4-4393-a3c1-3e593ac83351");
+        public static Guid Cyclops = new System.Guid("1f382d52-6cb8-4a6f-9547-ce20b7d1ff1f");
+        public static Guid DarkFolk = new System.Guid("9c337829-cc3c-404e-b3da-6b8735321677");
+        public static Guid Draconic = new System.Guid("8e1e46c0-7023-4714-9e3f-a417a47022a6");
+        public static Guid DrowSignLanguage = new System.Guid("e3271317-45e6-4f9e-8949-d608db67cb51");
+        public static Guid Druidic = new System.Guid("121d8d7c-20ca-4b74-ad9e-bb4020d21772");
+        public static Guid Dwarven = new System.Guid("6d754abd-a1f4-4244-a0ea-4b9b9d3ab9f9");
+        public static Guid Dziriak = new System.Guid("b98476e1-3fd4-4f3e-b01b-37e9b0bfc80f");
+        public static Guid Elven = new System.Guid("862c2302-2b6c-40eb-b63b-72ceb2fdb099");
+        public static Guid Giant = new System.Guid("46035b18-69df-4229-afdd-18795b11b213");
+        public static Guid Gnoll = new System.Guid("680b3ecf-5600-4b0d-b8dc-2375e2ae781a");
+        public static Guid Gnome = new System.Guid("40e82672-3cad-476f-b86d-ee4b610bb30d");
+        public static Guid Goblin = new System.Guid("2a4d0c82-2629-476c-8932-71f743f0f997");
+        public static Guid Grippli = new System.Guid("8a9c9b6f-f3c9-40de-9dc5-11391eb4ee7a");
+        public static Guid Halfling = new System.Guid("4f6f6ebc-933b-4963-87b9-c1ea7f8e48eb");
+        public static Guid Ignan = new System.Guid("bc37860b-8031-47b2-9f77-75fafffdfad8");
+        public static Guid Infernal = new System.Guid("795d1353-48cc-4ffb-9dbd-2c8f0a981259");
+        public static Guid Necril = new System.Guid("07c64fd7-61f0-48d0-9c2a-506457a053eb");
+        public static Guid Orc = new System.Guid("9d87af67-b4f1-481e-aca1-47454d4d4c24");
+        public static Guid Protean = new System.Guid("8b4b6e6c-427d-42dc-ba16-1686854e94af");
+        public static Guid Sphinx = new System.Guid("40563e63-c48c-4d45-972d-867505d61185");
+        public static Guid Sylvan = new System.Guid("45c441d8-e074-44d1-8dc3-4cf9b73cafc5");
+        public static Guid Tengu = new System.Guid("5280a096-7477-4d12-b340-1bc6807c0809");
+        public static Guid Terran = new System.Guid("88ca1edc-6cb3-498e-8931-c668d6965a92");
+        public static Guid Treant = new System.Guid("f3a1f2eb-3a60-4457-9564-c5202c0f7757");
+        public static Guid Undercommon = new System.Guid("a9a6c3cb-c89c-4c58-9270-1ab321f1b82b");
+        public static Guid Vegepygmy = new System.Guid("6703b308-621b-4144-a53b-60bd609fa3be");
+    }
+
+    public class Language
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 
     public class Spellbook
     {
+        public Spellbook()
+        {
+            Spells = new List<SpellbookSpell>();
+        }
+
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Spell> Spells { get; set; }
+        public bool IsActive { get; set; }
+        public List<SpellbookSpell> Spells { get; set; }
     }
 
     public class SpellbookSpell
@@ -46,13 +111,14 @@ namespace PathfinderCharacter.Models
         public int Quantity { get; set; }
         public List<MetaMagic> MetaMagics { get; set; }
         public Spell Spell { get; set; }
+        public int Used { get; set; }
     }
 
     public class MetaMagic
     {
         public Guid Id { get; set; }
         public int LevelModifier { get; set; }
-
+        public string Name { get; set; }
     }
 
     public class Attack {
@@ -61,21 +127,26 @@ namespace PathfinderCharacter.Models
         public ModifiableStat Critical { get; set; }
         //public DamageType DamageType { get; set; }
         //public Ammunition Ammunition { get; set; }
-        public ModifiableStat D4s { get; set; }
-        public ModifiableStat D6s { get; set; }
-        public ModifiableStat D8s { get; set; }
-        public ModifiableStat D10s { get; set; }
-        public ModifiableStat D12s { get; set; }
-        public ModifiableStat D20s { get; set; }
+        public int D4s { get; set; }
+        public int D6s { get; set; }
+        public int D8s { get; set; }
+        public int D10s { get; set; }
+        public int D12s { get; set; }
+        public int D20s { get; set; }
         public ModifiableStat BaseDamage { get; set; }
     }
-
-
+    
     public class ModifiableStat
     {
+        public ModifiableStat(PathfinderContext context, Guid ModificationTypeKey, double value)
+        {
+            ModificationType = context.ModificationTypes.Find(ModificationTypeKey);
+            Value = value;
+        }
+
         public Guid Id { get; set; }
         [Required]
-        public int Value { get; set; }
+        public double Value { get; set; }
         public ModificationType ModificationType { get;set; }
         public StatKey StatKey { get; set; }
     }
@@ -86,7 +157,6 @@ namespace PathfinderCharacter.Models
         public string Type { get; set; }
         public bool Stackable { get; set; }
     }
-
 
     internal struct ModificationTypes
     {
@@ -147,7 +217,6 @@ namespace PathfinderCharacter.Models
         public Guid Id { get; set; }
         public Skill Skill { get; set; }
         public ModifiableStat Value { get; set; }
-        
     }
 
     public class Skill
@@ -176,7 +245,7 @@ namespace PathfinderCharacter.Models
     {
         public Guid Id { get; set; }
         public Ability Ability { get; set; }
-        public ModifiableStat BaseScore { get; set; }
+        public ModifiableStat Value { get; set; }
     }
 
     public class CharacterHeroClass
@@ -287,7 +356,5 @@ namespace PathfinderCharacter.Models
         public static Guid Survival = new System.Guid("f8be30ea-795b-4277-8e6b-d204491eb14a");
         public static Guid Swim = new System.Guid("6d88cc35-9922-44f6-9d1f-54720d01474c");
         public static Guid UseMagicDevice = new System.Guid("eb06ccd3-7d24-4c5b-9f09-dae98481b9ff");
-        
     }
-                
 }
