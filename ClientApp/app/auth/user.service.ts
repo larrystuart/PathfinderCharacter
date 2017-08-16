@@ -6,18 +6,22 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class UserService {
     private baseUrl: string = '/api/User/';
-
+    private _currentUser: Observable<User>;
     constructor(private http: Http) {
     }
 
-    getUser(): Observable<User> {
+    getUser(authKey): Observable<User> {
         let value$ = this.http
-            .get(this.baseUrl + '12345-getProperAuth')
+            .get(this.baseUrl + authKey)
             .map(function (response: Response) {
                 return response.json() as User
             });
 
-        return value$;
+        return this._currentUser = value$;
+    }
+
+    getCurrentUser(): Observable<User> {
+        return this._currentUser;
     }
 }
 

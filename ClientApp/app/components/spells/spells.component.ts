@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LookupService, HeroClass, School, SavingThrow } from '../../shared/lookup.service';
 import { SpellService, Spell } from './spells.service';
 import { PagerService } from '../../shared/pager.service';
+import { Http } from '@angular/http';
 
 @Component({
     selector: 'spells',
@@ -23,11 +24,12 @@ export class SpellsComponent {
     public filterSchools: School[];
     public filterSavingThrows: SavingThrow[];
     public filterSearchQuery: string = "";
+    public http: Http;
 
     // pager object
     public pager: any = {};
 
-    constructor(private lookupService: LookupService, private spellService: SpellService, private pagerService: PagerService) {
+    constructor(http: Http, private lookupService: LookupService, private spellService: SpellService, private pagerService: PagerService) {
 
         spellService.getAll().subscribe(result => {
             this.spells = result;
@@ -45,6 +47,11 @@ export class SpellsComponent {
         lookupService.getSavingThrows().subscribe(result => {
             this.filterSavingThrows = result;
         });
+
+        //only use this to populate the database from the raw spell data
+        //http.get('/api/Spells/DataMigrate').subscribe(result => {
+        //    this.message = result.text.toString();
+        //});
     }
 
     public getSpellLevelByClass(spell: Spell): string {

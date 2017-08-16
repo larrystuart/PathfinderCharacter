@@ -18,6 +18,8 @@ namespace PathfinderCharacter.Controllers
             this.pfContext = pfContext;
         }
 
+        [HttpGet]
+        [Route("{AuthKey}")]
         public User Get(string AuthKey)
         {
             return pfContext.Users.Include(u => u.UserCharacters).FirstOrDefault(u => u.AuthenticationId == AuthKey);
