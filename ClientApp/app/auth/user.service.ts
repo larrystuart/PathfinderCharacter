@@ -2,6 +2,7 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { SimpleCharacter } from '../components/character/character.service';
 
 @Injectable()
 export class UserService {
@@ -32,11 +33,3 @@ export interface User {
     lastName: string;
 }
 
-export interface SimpleCharacter {
-    id: string;
-    firstName: string;
-    lastName: string;
-    gender: string;
-    experience: string;
-    level: string;
-}

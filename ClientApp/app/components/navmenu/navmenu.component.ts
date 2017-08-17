@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService, User } from '../../auth/user.service';
+import { CharacterService, SimpleCharacter } from '../character/character.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
     selector: 'nav-menu',
@@ -7,12 +9,20 @@ import { UserService, User } from '../../auth/user.service';
     styleUrls: ['./navmenu.component.css']
 })
 export class NavMenuComponent {
-    public name: string = "";
+    public character: SimpleCharacter;
+    public user: User;
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private characterService: CharacterService) {
         userService.getCurrentUser().subscribe(result => {
-            this.name = result.firstName + " " + result.lastName;
+            this.user = result as User;
         });
+
+        characterService.currentCharacter$.subscribe(result => {
+            this.character = result as SimpleCharacter;
+        });
+
         
     }
+
+
 }

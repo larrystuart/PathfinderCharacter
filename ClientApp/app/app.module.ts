@@ -10,6 +10,7 @@ import { AppRoutingModule, routableComponents } from './app-routing.module';
 import { LookupService } from './shared/lookup.service';
 import { CacheService } from './shared/cache.service';
 import { PagerService } from './shared/pager.service';
+import { CharacterService } from './components/character/character.service';
 import { UserService, User } from './auth/user.service';
 
 @NgModule({
@@ -28,7 +29,7 @@ import { UserService, User } from './auth/user.service';
         RouterModule,
         AppRoutingModule// Must be last to catch all for routing if other routes are added
     ],
-    providers: [LookupService, CacheService, PagerService, UserService]
+    providers: [LookupService, CacheService, PagerService, UserService, CharacterService]
 })
 export class AppModule {
     public user: User;
@@ -36,8 +37,6 @@ export class AppModule {
     constructor(private userService: UserService) {
         userService.getUser('12345-getProperAuth').subscribe(result => {
             this.user = result;
-            console.log(this.user);
         });
-        
     }
 }

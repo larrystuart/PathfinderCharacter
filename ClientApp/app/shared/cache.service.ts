@@ -56,7 +56,6 @@ export class CacheService {
                         return "FAILURE";
                     } else if (response.status == 200) {
                         this.data.spells = response.json() as Spell[];
-                        console.log("return fresh version");
                         return this.data.spells;
                     }
                     // make it shared so more than one subscriber can get the result

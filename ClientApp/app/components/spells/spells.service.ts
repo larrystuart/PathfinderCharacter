@@ -13,12 +13,14 @@ export class SpellService
     
     constructor(private http: Http, private cacheService: CacheService)
     {
-        
+        this.http.get('/api/Character/');
     }
     
     getAll(): Observable<Spell[]> {
         return this.cacheService.getSpells(this.baseUrl + 'Spells');
     }
+
+
     
 }
 

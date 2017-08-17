@@ -7,7 +7,7 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]="['/home']">Pathfinder Wizard Manager - {{ name }}</a>
+            <a class='navbar-brand' [routerLink]="['/home']">Pathfinder Wizard Manager - {{ user?.firstName + ' ' + user?.lastName }} - {{ character?.firstName + ' ' + character?.lastName}}</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>

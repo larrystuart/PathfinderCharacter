@@ -1,8 +1,11 @@
 <h1>Character</h1>
+
+<div *ngFor="let character of simpleCharacters">
+    <button class="btn btn-default" (click)="selectCharacter(character.id)">{{character.firstName + ' ' + character.lastName }}</button>
+</div>
+
 <form [formGroup]="characterForm" autocomplete="off" novalidate>
-    <div *ngFor="let character of simpleCharacters">
-        {{ character.firstName }} {{ character.lastName }} 
-    </div>
+    
     
     <div class="form-group">
         <label for="name">Character Name</label>
