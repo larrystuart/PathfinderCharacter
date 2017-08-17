@@ -7,7 +7,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 export class CharacterService {
     private baseUrl: string = '/api/Character/';
-    private _currentCharacter: BehaviorSubject<SimpleCharacter> = new BehaviorSubject<SimpleCharacter>({} as SimpleCharacter);
+    private _currentCharacter: BehaviorSubject<SimpleCharacter> = new BehaviorSubject<SimpleCharacter>(undefined);
 
     currentCharacter$ = this._currentCharacter.asObservable();
 
