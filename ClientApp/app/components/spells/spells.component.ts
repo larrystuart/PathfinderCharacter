@@ -54,6 +54,14 @@ export class SpellsComponent {
         //});
     }
 
+    public addSpell(spellId: string) {
+        //todo: make spellbook picker
+        var spellbookId = '8E8D8705-7185-4E53-FA14-08D4E8C7DE18';
+        this.http.get('/api/Spells/AddSpell/' + spellId + '/tobook/' + spellbookId).subscribe(result => {
+            this.message = result.text.toString();
+        });
+    }
+
     public getSpellLevelByClass(spell: Spell): string {
         return spell.classes.find(c => c.heroClass.id == this.filterClassId).classLevel.toString();
     }

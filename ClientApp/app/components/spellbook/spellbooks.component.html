@@ -1,0 +1,9 @@
+<h1>Spell Books</h1>
+<div *ngFor="let spellbook of spellbooks">
+    <button [class.btn-success]="spellbook.isActive" class="btn btn-default"><span class="glyphicon glyphicon-book"></span> {{spellbook.name}}</button>
+    <div *ng-if="spellbook.isActive">
+        <spellbook [spellbook]="spellbook"></spellbook>
+    </div>
+</div>
+
+<!--<spellbook (spellbookId)="selectedSpellbook.id"></spellbook>-->

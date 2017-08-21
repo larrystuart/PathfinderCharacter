@@ -5,6 +5,7 @@ import { AppComponent } from './components/app/app.component'
 import { DieComponent } from './components/dice/die.component'
 import { PagerComponent } from './components/pager/pager.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
+import { SpellbookComponent } from './components/spellbook/spellbook.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routableComponents } from './app-routing.module';
 import { LookupService } from './shared/lookup.service';
@@ -20,7 +21,8 @@ import { UserService, User } from './auth/user.service';
         NavMenuComponent,
         routableComponents,
         DieComponent,
-        PagerComponent
+        PagerComponent,
+        SpellbookComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

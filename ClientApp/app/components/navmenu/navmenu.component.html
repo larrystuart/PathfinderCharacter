@@ -19,7 +19,7 @@
                         <span class='glyphicon glyphicon-user'></span> Character
                     </a>
                 </li>
-                <li  *ngIf="character" [routerLinkActive]="['link-active']">
+                <li *ngIf="character" [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/skills']">
                         <span class='glyphicon glyphicon-education'></span> Skills
                     </a>
@@ -27,6 +27,11 @@
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/spells']">
                         <span class='glyphicon glyphicon-fire'></span> Spells
+                    </a>
+                </li>
+                <li *ngIf="character" [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/spellbooks']">
+                        <span class='glyphicon glyphicon-fire'></span> Spell Books
                     </a>
                 </li>
                 <li  *ngIf="character" [routerLinkActive]="['link-active']">

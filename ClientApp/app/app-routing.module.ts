@@ -7,11 +7,13 @@ import { CharacterComponent } from './components/character/character.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { DiceComponent } from './components/dice/dice.component';
 import { SpellsComponent } from './components/spells/spells.component';
+import { SpellbooksComponent } from './components/spellbook/spellbooks.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent }, //by having "component:" this is eagerly loaded
     { path: 'spells', component: SpellsComponent },
+    { path: 'spellbooks', component: SpellbooksComponent },
     { path: 'skills', component: SkillsComponent },
     { path: 'character', component: CharacterComponent },
     //{ path: 'skills', loadChildren: 'app/components/skills/skills.component#SkillsComponent' }, //by having "loadChildren:" this is lazy loaded, but I think it needs to be a module, not a component???
@@ -27,4 +29,4 @@ const routes: Routes = [
 
 export class AppRoutingModule { }
 
-export const routableComponents = [HomeComponent, SkillsComponent, CharacterComponent, InventoryComponent, DiceComponent, SpellsComponent]
+export const routableComponents = [HomeComponent, SkillsComponent, CharacterComponent, InventoryComponent, DiceComponent, SpellsComponent, SpellbooksComponent]

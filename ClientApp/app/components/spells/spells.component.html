@@ -36,8 +36,9 @@
                     <div class="col-lg-4" *ngIf="!filterClassId"><span *ngFor="let class of spell.classes">{{  class.heroClass.name + " ("+class.classLevel+") " }}</span></div>
                     <div class="col-lg-1" *ngIf="filterClassId"><span>{{ getSpellLevelByClass(spell) }}</span></div>
                     <div class="col-lg-1" *ngIf="spell.school != null">{{ spell.school.name }}</div>
-                    <div class="col-lg-4">{{ spell.shortDescription }}</div>
+                    <div class="col-lg-4">{{ spell.shortDescription }} <button (click)="addSpell(spell.id)" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Add</button></div>
                     <div class="clearfix"></div>
+
                 </a>
                 
             </div>

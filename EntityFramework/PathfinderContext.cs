@@ -33,6 +33,7 @@ namespace PathfinderCharacter
         public DbSet<StatKey> StatKeys { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Character> Characters { get; set; }
+        public DbSet<Spellbook> SpellBooks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Modifier>()

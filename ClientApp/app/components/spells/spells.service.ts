@@ -13,7 +13,6 @@ export class SpellService
     
     constructor(private http: Http, private cacheService: CacheService)
     {
-        this.http.get('/api/Character/');
     }
     
     getAll(): Observable<Spell[]> {
@@ -157,48 +156,48 @@ export interface Spell {
     components: SpellComponent[];
 }
 
-interface Subschool
+export interface Subschool
 {
     id: string;
     name: string;
 }
 
-interface SpellSubschool {
+export interface SpellSubschool {
     id: string;
     subschool: Subschool;
 }
 
-interface SpellClass {
+export interface SpellClass {
     id: string;
     heroClass: HeroClass;
     classLevel: number;
 }
 
-interface SpellSavingThrow {
+export interface SpellSavingThrow {
     id: string;
     savingThrow: SavingThrow;
 }
 
-interface SpellComponent {
+export interface SpellComponent {
     id: string;
     material: string;
     materialCost: Currency;
     componentType: ComponentType;
 }
 
-interface Currency {
+export interface Currency {
     id: string;
     amount: number;
     currencyUnit: CurrencyUnit;
 }
 
-interface ComponentType {
+export interface ComponentType {
     id: string;
     name: string;
     symbol: string;
 }
 
-interface CurrencyUnit {
+export interface CurrencyUnit {
     id: string;
     name: string;
     nameShort: string;
