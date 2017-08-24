@@ -23,7 +23,7 @@ namespace PathfinderCharacter.Controllers
         [Route("{bookId}")]
         public Spellbook Get(Guid bookId)
         {
-            Spellbook spellbook = pfContext.SpellBooks.Include(sb => sb.Spells).First(sb => sb.Id == bookId);
+            Spellbook spellbook = pfContext.SpellBooks.Include(sb => sb.Spells).ThenInclude(s => s.Spell).First(sb => sb.Id == bookId);
 
             return spellbook;
         }
@@ -31,7 +31,7 @@ namespace PathfinderCharacter.Controllers
         [Route("[action]/{characterId}")]
         public IEnumerable<Spellbook> GetBooks(Guid? characterId)
         {
-            Character currentCharacter = pfContext.Characters.Include(c => c.CharacterSpellbooks).First(c => c.Id == characterId);
+            Character currentCharacter = pfContext.Characters.Include(c => c.CharacterSpellbooks).ThenInclude(sb => sb.Spells).ThenInclude(s => s.Spell).First(c => c.Id == characterId);
 
             return currentCharacter.CharacterSpellbooks;
         }

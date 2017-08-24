@@ -1,1 +1,15 @@
-﻿
+﻿div.panel{
+    position:relative;
+}
+
+.spell-panel-buttons {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 999;
+}
+
+div.panel:hover .spell-panel-buttons {
+    display: block;
+}

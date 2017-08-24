@@ -29,14 +29,18 @@
 <p *ngIf="!spells"><em>Loading...</em></p>
 <div *ngIf="spells">
     <div class="panel-group" id="accordion">
+        
         <div class="panel panel-default" *ngFor="let spell of visibleSpells">
+            <div class="spell-panel-buttons">
+                <button (click)="addSpell(spell.id)" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Add</button>
+            </div>
             <div class="panel-heading">
                 <a data-toggle="collapse" class="pc-collapse-header" data-parent="#accordion"  [href]="'#' + spell.id"> 
                     <div class="col-lg-3"><h3>{{ spell.name }}</h3></div>
                     <div class="col-lg-4" *ngIf="!filterClassId"><span *ngFor="let class of spell.classes">{{  class.heroClass.name + " ("+class.classLevel+") " }}</span></div>
                     <div class="col-lg-1" *ngIf="filterClassId"><span>{{ getSpellLevelByClass(spell) }}</span></div>
                     <div class="col-lg-1" *ngIf="spell.school != null">{{ spell.school.name }}</div>
-                    <div class="col-lg-4">{{ spell.shortDescription }} <button (click)="addSpell(spell.id)" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Add</button></div>
+                    <div class="col-lg-4">{{ spell.shortDescription }}</div>
                     <div class="clearfix"></div>
 
                 </a>

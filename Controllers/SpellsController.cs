@@ -23,10 +23,21 @@ namespace PathfinderCharacter.Controllers
             this.pfContext = pfContext;
         }
 
-        //var rng = new Random();
-        //rng.Next(-20, 55)
-        //Summary = Summaries[rng.Next(Summaries.Length)]
+        // /api/Spells/AddSpell/' + spellId + '/tobook/' + spellbookId
+        [HttpGet("[action]/{spellId}/tobook/{spellbookId}")]
+        public void AddSpell(Guid spellId, Guid spellbookId)
+        {
+            pfContext.SpellBooks.Find(spellbookId).Spells.Add(new SpellbookSpell() {
+                MetaMagics = new List<MetaMagic>(),
+                Quantity = 1, 
+                Used = 0,
+                Spell = pfContext.Spells.Find(spellId)
+            });
 
+            pfContext.SaveChanges();
+        }
+
+        
         [HttpGet("[action]")]
         public IEnumerable<Spell> Spells()
         {

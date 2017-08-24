@@ -10,8 +10,7 @@ import { SpellbookService, Spellbook } from './spellbooks.service';
 })
 export class SpellbookComponent {
     @Input() spellbook: Spellbook;
-    
-    
+
     constructor(private spellService: SpellService, private spellbookService: SpellbookService) {
     
     }

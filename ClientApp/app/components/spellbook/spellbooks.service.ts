@@ -37,10 +37,10 @@ export class SpellbookService
 
     public getSpellbook(spellbookId)
     {
-        console.log("id: " + spellbookId);
         return this.http
             .get(this.booksBaseUrl + spellbookId)
             .map(response => {
+                console.log(response.json() as Spellbook);
                 return response.json() as Spellbook;
             });
     }
@@ -49,7 +49,7 @@ export class SpellbookService
 export interface Spellbook {
     id: string;
     name: string;
-    spellbookSpells: SpellbookSpell[];
+    spells: SpellbookSpell[];
     isActive: boolean;
 }
 

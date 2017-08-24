@@ -10,10 +10,15 @@ import { SpellbookService, Spellbook } from './spellbooks.service';
 })
 export class SpellbooksComponent {
     public spellbooks: Spellbook[] = [];
+    public selectedSpellbook: Spellbook;
     
     constructor(private spellService: SpellService, private spellbookService: SpellbookService) {
         spellbookService.spellbooks$.subscribe(result => {
             this.spellbooks = result;
         });
+    }
+
+    public setSelectedSpellbook(spellbook) {
+        this.selectedSpellbook = spellbook;
     }
 }

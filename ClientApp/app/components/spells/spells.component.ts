@@ -28,8 +28,8 @@ export class SpellsComponent {
 
     // pager object
     public pager: any = {};
-
-    constructor(http: Http, private lookupService: LookupService, private spellService: SpellService, private pagerService: PagerService) {
+    
+    constructor(private lookupService: LookupService, private spellService: SpellService, private pagerService: PagerService) {
 
         spellService.getAll().subscribe(result => {
             this.spells = result;
@@ -57,9 +57,8 @@ export class SpellsComponent {
     public addSpell(spellId: string) {
         //todo: make spellbook picker
         var spellbookId = '8E8D8705-7185-4E53-FA14-08D4E8C7DE18';
-        this.http.get('/api/Spells/AddSpell/' + spellId + '/tobook/' + spellbookId).subscribe(result => {
-            this.message = result.text.toString();
-        });
+
+        this.spellService.addSpell(spellId, spellbookId);
     }
 
     public getSpellLevelByClass(spell: Spell): string {

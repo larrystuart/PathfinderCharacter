@@ -19,7 +19,12 @@ export class SpellService
         return this.cacheService.getSpells(this.baseUrl + 'Spells');
     }
 
-
+    addSpell(spellId, spellbookId)
+    {
+        this.http.get('/api/Spells/AddSpell/' + spellId + '/tobook/' + spellbookId).subscribe(result => {
+            alert(result.text.toString());
+        });
+    }
     
 }
 
@@ -39,6 +44,7 @@ function toSpell(s: any): Spell {
     });
     return spell;
 }
+
 
 export interface RawSpell {
     id: number;

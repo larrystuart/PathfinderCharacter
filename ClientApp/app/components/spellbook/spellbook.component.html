@@ -1,5 +1,7 @@
-<h1>Spellbook: {{spellbook.name}}</h1>
+<div *ngIf="spellbook">
+    <h1>Spellbook: {{spellbook.name}}</h1>
 
-<div *ngFor="let spell of spellbook.spells">
-    {{spell.name}}
+    <div *ngFor="let spellbookspell of spellbook.spells">
+        {{spellbookspell.spell.name}}
+    </div>
 </div>
