@@ -19,14 +19,14 @@
 }
 
 
-.dice-container .dice{
-    float:left;
+.dice-container .dice {
+    float: left;
 }
 
 .dice {
     position: relative;
     overflow: hidden;
-    margin:20px;
+    margin: 20px;
 }
 
     .dice:before {
@@ -65,10 +65,10 @@
 
 .d20 {
     background-image: url(../images/d20.png);
-    height:80px;
-    width:80px;
-    background-repeat:no-repeat;
-    background-size:100% 100%;
+    height: 80px;
+    width: 80px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
 
 .d12 {
@@ -109,6 +109,6 @@
     width: 80px;
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    margin-top:30px;
-    margin-bottom:10px;
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
